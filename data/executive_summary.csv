@@ -1,2 +1,2 @@
 orders,delivered_orders,items,customers,sellers,products,customer_states,seller_states,total_gmv,item_revenue,freight_revenue,avg_order_value,avg_review,low_review_rate_pct,delay_rate_pct,avg_delivery_days,median_delivery_days
-99441,96478,112650,96096,3095,32951,27,23,15843553.24,13591643.7,2251909.54,160.99,4.087,14.53,8.11,12.56,10.22
+99441,96478,112650,96096,3095,32951,27,23,15843553.24,13591643.7,2251909.54,159.8564,4.1562,12.7692,8.1117,12.5582,10.2175

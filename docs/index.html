@@ -1,61 +1,1461 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Olist Delivery Experience Analytics</title>
 <style>
-:root{--navy:#061b4e;--navy2:#03123b;--navy3:#0a2e75;--cream:#f7f3e8;--paper:#fff;--ink:#071b49;--muted:#6b7898;--line:rgba(6,27,78,.12);--lineDark:rgba(255,255,255,.16);--blue:#1267ff;--blue2:#64b7ff;--cyan:#74e8fb;--green:#20d48e;--lime:#c8ff59;--orange:#ff8a3d;--red:#ff5b52;--purple:#8e6cff;--shadow:0 24px 70px rgba(0,12,46,.22)}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--navy) 0 430px,var(--cream) 430px 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.42}body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 86% 7%,rgba(100,183,255,.22),transparent 25%),radial-gradient(circle at 16% 20%,rgba(116,232,251,.12),transparent 26%)}.app{width:min(1360px,calc(100% - 28px));margin:0 auto;padding:18px 0 44px}.shell{display:grid;grid-template-columns:285px 1fr;gap:16px}aside{position:sticky;top:16px;height:calc(100vh - 32px);overflow:auto;border:1px solid var(--lineDark);border-radius:32px;background:rgba(3,18,59,.88);box-shadow:var(--shadow);padding:20px;backdrop-filter:blur(18px);color:#fff}main{display:flex;flex-direction:column;gap:16px}.brand{display:flex;gap:12px;align-items:center}.mark{width:48px;height:48px;border-radius:18px;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:950;letter-spacing:-.06em}.brand strong{font-size:19px;letter-spacing:-.04em;color:#fff}.brand span{display:block;font-size:12px;color:#bdd0fb}.filter-title{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#9fb7eb;font-weight:950;margin:20px 0 8px}.slicer,.lang{display:flex;flex-direction:column;gap:8px}.lang{display:grid;grid-template-columns:1fr 1fr}.slicer button,.lang button,.top-actions button{border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.08);border-radius:999px;padding:10px 12px;font-weight:850;color:#eef5ff;cursor:pointer;text-align:left;transition:.18s}.slicer button:hover,.lang button:hover,.top-actions button:hover{border-color:var(--cyan);transform:translateY(-1px);background:rgba(255,255,255,.13)}.slicer button.active,.lang button.active,.top-actions button.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 10px 26px rgba(18,103,255,.32)}.note{border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:14px;background:rgba(255,255,255,.08);font-size:13px;color:#bed0f6;margin-top:18px}.note strong{color:#fff}header{border:1px solid rgba(255,255,255,.14);border-radius:34px;background:linear-gradient(135deg,#061b4e 0%,#082868 55%,#0a3a91 100%);box-shadow:var(--shadow);padding:30px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);gap:26px;align-items:center;overflow:hidden;position:relative;color:#fff}header:after{content:"";position:absolute;right:70px;top:38px;width:112px;height:112px;border-radius:50%;background:radial-gradient(circle,var(--cyan),rgba(100,183,255,.16) 60%,transparent 62%);box-shadow:0 0 0 18px rgba(100,183,255,.10),0 0 52px rgba(116,232,251,.42)}header>*{position:relative}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--cyan);font-weight:950}.title{font-size:clamp(42px,5.3vw,72px);line-height:.92;letter-spacing:-.075em;margin:12px 0;color:#fff;max-width:680px}.subtitle{font-size:18px;color:#dce8ff;margin:0;max-width:820px}.badge{display:inline-flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.10);font-size:12px;font-weight:850;margin:12px 4px 0 0;color:#fff}.hero-side{display:flex;flex-direction:column;gap:16px;align-items:stretch}.hero-card{border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(235,244,255,.92));box-shadow:0 28px 80px rgba(0,0,0,.25);padding:22px;min-height:245px;color:var(--navy);position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;right:-40px;top:-45px;width:150px;height:150px;border-radius:50%;background:rgba(18,103,255,.11)}.hero-card h3{margin:0 0 10px;font-size:24px;letter-spacing:-.05em}.hero-card p{margin:0;color:#5f6f96}.mini-flow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.mini-flow div{border:1px solid var(--line);border-radius:18px;padding:12px;background:#fff}.mini-flow strong{display:block;font-size:20px;letter-spacing:-.04em}.mini-flow span{font-size:12px;color:var(--muted)}.top-actions{display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap}.grid-kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.kpi,.card{border:1px solid var(--line);border-radius:28px;background:var(--paper);box-shadow:0 18px 50px rgba(6,27,78,.10);padding:18px}.kpi span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:950}.kpi strong{display:block;font-size:34px;line-height:1;letter-spacing:-.06em;margin:18px 0 7px;color:var(--navy)}.kpi small{color:var(--muted);font-size:12px}.section-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card h2{font-size:23px;line-height:1;letter-spacing:-.045em;margin:0 0 7px;color:var(--navy)}.card p{margin:0 0 14px;color:var(--muted)}.bar-row{display:grid;grid-template-columns:230px 1fr 94px;gap:10px;align-items:center;margin:10px 0}.bar-label{font-size:13px;font-weight:850;color:var(--navy)}.bar-label small{display:block;color:var(--muted);font-weight:650;margin-top:2px}.bar-bg{height:27px;background:#eaf0ff;border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:var(--blue)}.green{background:var(--green)}.deep{background:var(--blue)}.orange{background:var(--orange)}.red{background:var(--red)}.blue{background:var(--blue)}.purple{background:var(--purple)}.cyan{background:var(--cyan)}.bar-val{text-align:right;color:var(--muted);font-weight:850;font-variant-numeric:tabular-nums}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.num{text-align:right;font-variant-numeric:tabular-nums}.box{border:1px solid var(--line);border-radius:20px;background:#f7f9ff;padding:14px}.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.box span{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:900}.box strong{display:block;font-size:27px;letter-spacing:-.05em;margin-top:12px;color:var(--navy)}.insight{border-left:5px solid var(--cyan);padding-left:14px;margin-top:12px}.insight strong{display:block;color:var(--navy)}.insight p{margin:3px 0 0;color:var(--muted)}.scenario{border:1px solid var(--line);background:linear-gradient(135deg,#fff,#f3f7ff);border-radius:20px;padding:14px;margin:10px 0}.scenario strong{display:block;color:var(--navy)}.scenario .impact{font-size:28px;letter-spacing:-.06em;font-weight:950;margin-top:8px;color:var(--blue)}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:pre-wrap;background:var(--navy);color:#f7f4ea;border-radius:18px;padding:16px;overflow:auto}.hidden{display:none!important}.footer-note{font-size:12px;color:#5e6e93}@media(max-width:1100px){.shell{grid-template-columns:1fr}aside{position:relative;height:auto}header,.section-grid,.three{grid-template-columns:1fr}.grid-kpi{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid-kpi{grid-template-columns:1fr}.bar-row{grid-template-columns:1fr}.bar-val{text-align:left}.title{font-size:40px}.hero-card{min-height:0}.mini-flow{grid-template-columns:1fr}}
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --bg: #06142f;
+  --bg-soft: #0a1d43;
+  --panel: rgba(8, 24, 59, 0.78);
+  --panel-strong: rgba(11, 30, 73, 0.92);
+  --paper: #f6f9ff;
+  --paper-soft: rgba(255, 255, 255, 0.74);
+  --ink: #eaf1ff;
+  --ink-dark: #081735;
+  --muted: #a7b8df;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(103, 185, 255, 0.28);
+  --cyan: #75e7ff;
+  --blue: #4b7dff;
+  --green: #22d3a6;
+  --amber: #ffb24c;
+  --red: #ff6d6d;
+  --shadow: 0 28px 72px rgba(0, 0, 0, 0.28);
+  --radius-xl: 30px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(117, 231, 255, 0.14), transparent 22%),
+    radial-gradient(circle at 88% 8%, rgba(75, 125, 255, 0.18), transparent 26%),
+    linear-gradient(180deg, #051126 0%, #071936 38%, #0b2147 100%);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 72%);
+}
+
+.app {
+  width: min(1440px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 20px 0 44px;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.sidebar,
+.hero,
+.panel,
+.kpi-card {
+  border: 1px solid var(--line);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.sidebar {
+  position: sticky;
+  top: 18px;
+  height: calc(100vh - 36px);
+  overflow: auto;
+  padding: 22px;
+  border-radius: 32px;
+  background: rgba(6, 20, 47, 0.88);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.mark,
+.hero h1,
+.section-title,
+.metric-value,
+.score,
+.matrix-number {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  color: #07132d;
+  background: linear-gradient(145deg, var(--cyan), #d6f8ff);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.08em;
+}
+
+.brand strong {
+  display: block;
+  font-size: 18px;
+}
+
+.brand span,
+.side-copy,
+.eyebrow,
+.hero p,
+.hero-note,
+.panel p,
+.footnote,
+.metric-foot,
+.helper,
+.table th {
+  color: var(--muted);
+}
+
+.side-copy {
+  margin: 16px 0 18px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.nav-title,
+.metric-label,
+.mini-label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.nav-title {
+  margin: 18px 0 10px;
+}
+
+.nav-group {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-btn {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  padding: 12px 14px;
+  border-radius: 999px;
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, rgba(117, 231, 255, 0.28), rgba(75, 125, 255, 0.22));
+}
+
+.status-card {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(117, 231, 255, 0.1), rgba(75, 125, 255, 0.06));
+  border: 1px solid rgba(117, 231, 255, 0.14);
+}
+
+.status-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.main {
+  display: grid;
+  gap: 18px;
+}
+
+.hero {
+  padding: 30px;
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 90% 14%, rgba(117, 231, 255, 0.18), transparent 18%),
+    linear-gradient(135deg, rgba(7, 23, 53, 0.98), rgba(13, 35, 82, 0.95));
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 24px;
+  align-items: end;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  margin: 14px 0;
+  font-size: clamp(40px, 6vw, 78px);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+}
+
+.hero p {
+  margin: 0;
+  max-width: 880px;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hero-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-stat,
+.kpi-card,
+.panel {
+  border-radius: var(--radius-xl);
+}
+
+.hero-stat {
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hero-stat strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 30px;
+  letter-spacing: -0.06em;
+}
+
+.hero-note {
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid.kpis {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid.two {
+  grid-template-columns: 1.08fr 0.92fr;
+}
+
+.grid.equal {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.kpi-card {
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.metric-value {
+  display: block;
+  margin-top: 14px;
+  font-size: 34px;
+  letter-spacing: -0.08em;
+}
+
+.metric-foot {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.panel {
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: grid;
+  gap: 18px;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  letter-spacing: -0.06em;
+}
+
+.panel p {
+  margin: 0 0 16px;
+  line-height: 1.65;
+}
+
+.signal-list,
+.metric-cards,
+.matrix-grid,
+.calibration-grid,
+.stack-list,
+.scenario-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.signal-item,
+.metric-card,
+.matrix-card,
+.calibration-card,
+.stack-item,
+.scenario-card,
+.mini-block {
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.signal-head,
+.metric-head,
+.matrix-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.signal-title,
+.metric-title,
+.matrix-title,
+.scenario-card strong {
+  font-weight: 800;
+}
+
+.helper {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.bar-track {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.09);
+  margin-top: 12px;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+}
+
+.bar-fill.green {
+  background: linear-gradient(90deg, #3fe4bc, var(--green));
+}
+
+.bar-fill.amber {
+  background: linear-gradient(90deg, #ffd276, var(--amber));
+}
+
+.bar-fill.red {
+  background: linear-gradient(90deg, #ff9d9d, var(--red));
+}
+
+.score {
+  font-size: 30px;
+  letter-spacing: -0.08em;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mini-value {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.matrix-boxes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.matrix-box {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.matrix-number {
+  display: block;
+  margin-top: 8px;
+  font-size: 26px;
+  letter-spacing: -0.06em;
+}
+
+.calibration-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 84px;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.scenario-card .score {
+  margin-top: 10px;
+}
+
+.callout {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(117, 231, 255, 0.16);
+  background: linear-gradient(180deg, rgba(117, 231, 255, 0.1), rgba(117, 231, 255, 0.03));
+}
+
+.footnote {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1200px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    top: 0;
+    height: auto;
+  }
+
+  .hero,
+  .grid.two,
+  .grid.equal,
+  .grid.three {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .app {
+    width: min(100%, calc(100% - 18px));
+    padding-top: 10px;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+
+  .grid.kpis,
+  .mini-grid,
+  .matrix-boxes {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+}
 </style>
 </head>
-<body><div class="app"><div class="shell"><aside>
-<div class="brand"><div class="mark">ol</div><div><strong>Olist CX Analytics</strong><span data-i="brandSub">história da experiência no marketplace</span></div></div>
-<div class="filter-title" data-i="language">Idioma</div><div class="lang"><button class="active" id="ptBtn">PT</button><button id="enBtn">EN</button></div>
-<div class="filter-title">Storyline</div><div class="slicer" id="viewSlicer"><button class="active" data-view="overview" data-i="navOverview">1. História executiva</button><button data-view="raw" data-i="navRaw">2. Raw → mart limpo</button><button data-view="delay" data-i="navDelay">3. Atraso afeta reviews</button><button data-view="geography" data-i="navGeo">4. Geografia muda custo</button><button data-view="categories" data-i="navCat">5. Exposição por categoria</button><button data-view="payments" data-i="navPay">6. Pagamentos e valor</button><button data-view="model" data-i="navModel">7. Camada preditiva</button><button data-view="scenarios" data-i="navScenarios">8. Cenários de negócio</button><button data-view="conclusion" data-i="navConclusion">9. Conclusão narrativa</button></div>
-<div class="filter-title" data-i="businessLens">Lente de negócio</div><div class="slicer" id="lensSlicer"><button class="active" data-lens="exec" data-i="lensExec">Executiva</button><button data-lens="ops" data-i="lensOps">Operações</button><button data-lens="cx" data-i="lensCx">Experiência do cliente</button><button data-lens="ml" data-i="lensMl">Modelo de risco</button></div>
-<div class="note"><strong>Design:</strong> <span data-i="designNote">paleta inspirada na Olist: azul-marinho, cards brancos, botões azuis e destaques em azul-claro.</span></div>
-</aside><main>
-<header><div><div class="kicker" data-i="kicker">E-commerce analytics · SQL mart · Python/Pandas · risco preditivo de CX</div><h1 class="title" data-i="title">Quando a entrega vira a avaliação</h1><p class="subtitle" data-i="subtitle">Dashboard narrativo com dados do marketplace Olist para mostrar como atrito logístico vira insatisfação, pressão de custo e oportunidade operacional.</p><span class="badge" data-i="badgeRaw">Raw CSVs com Git LFS</span><span class="badge" data-i="badgeDerived">Bases analíticas derivadas</span><span class="badge" data-i="badgeSql">Lógica SQL de transformação</span><span class="badge" data-i="badgeScenario">Camada de cenários</span></div><div class="hero-side"><div class="hero-card"><h3 data-i="heroCardTitle">Ecossistema de experiência</h3><p data-i="heroCardText">O pedido vira uma unidade de análise que conecta entrega, frete, categoria, pagamento e avaliação.</p><div class="mini-flow"><div><strong id="miniA">—</strong><span data-i="miniOrders">pedidos</span></div><div><strong id="miniB">—</strong><span data-i="miniDelay">atraso</span></div><div><strong id="miniC">—</strong><span data-i="miniReview">baixa avaliação</span></div><div><strong id="miniD">—</strong><span data-i="miniGmv">GMV</span></div></div></div><div class="top-actions"><button class="active" data-view="overview" data-i="topStory">História</button><button data-view="raw" data-i="topPipeline">Pipeline</button><button data-view="model" data-i="topModel">Modelo</button><button data-view="scenarios" data-i="topScenarios">Cenários</button></div></div></header>
-<section class="grid-kpi"><article class="kpi"><span data-i="kOrdersLabel">Pedidos</span><strong id="kOrders">—</strong><small data-i="kOrdersSmall">demanda do marketplace</small></article><article class="kpi"><span data-i="kDeliveredLabel">Entregues</span><strong id="kDelivered">—</strong><small data-i="kDeliveredSmall">pedidos com data de entrega</small></article><article class="kpi"><span>GMV</span><strong id="kGmv">—</strong><small data-i="kGmvSmall">incluindo frete</small></article><article class="kpi"><span data-i="kLowLabel">Baixa avaliação</span><strong id="kLowReview">—</strong><small>review score ≤ 2</small></article><article class="kpi"><span data-i="kDelayLabel">Taxa de atraso</span><strong id="kDelay">—</strong><small data-i="kDelaySmall">após a estimativa</small></article></section>
-<section class="section-grid view view-overview"><article class="card"><h2 data-i="storyTitle">A história de negócio</h2><p data-i="storyText">A base parece comercial, mas a narrativa mais forte é operacional: a entrega define memória, avaliação e confiança futura.</p><div id="storyBars">Loading data...</div><div class="insight"><strong data-i="coreThesis">Tese central</strong><p data-i="coreText">Insatisfação não é só produto. É cadeia de experiência: vendedor, frete, distância, promessa de entrega e review pós-compra.</p></div></article><article class="card"><h2 data-i="readoutTitle">Leitura executiva</h2><table><thead><tr><th data-i="question">Pergunta</th><th data-i="answer">Resposta</th></tr></thead><tbody id="readoutTable"></tbody></table></article></section>
-<section class="three view view-overview"><article class="card"><h2 data-i="hyp1">Hipótese 1</h2><p data-i="hyp1Text">Entregas atrasadas têm maior risco de baixa avaliação.</p><div class="scenario"><strong data-i="test">Teste</strong><span data-i="hyp1Test">Comparar risco de review baixo em pedidos atrasados.</span><div class="impact" id="hDelay">—</div></div></article><article class="card"><h2 data-i="hyp2">Hipótese 2</h2><p data-i="hyp2Text">Entrega entre estados muda custo e tempo.</p><div class="scenario"><strong data-i="test">Teste</strong><span data-i="hyp2Test">Comparar médias same-state e cross-state.</span><div class="impact" id="hCross">—</div></div></article><article class="card"><h2 data-i="hyp3">Hipótese 3</h2><p data-i="hyp3Text">Algumas categorias unem escala e insatisfação.</p><div class="scenario"><strong data-i="test">Teste</strong><span data-i="hyp3Test">Rankear exposição por volume × review baixo.</span><div class="impact" id="hCat">—</div></div></article></section>
-<section class="section-grid view view-raw hidden"><article class="card"><h2 data-i="rawTitle">Raw → mart analítico</h2><p data-i="rawText">Os CSVs brutos ficam em data/raw/ com Git LFS. O dashboard usa bases derivadas para performance e reprodutibilidade.</p><div id="rawTable"></div></article><article class="card"><h2 data-i="sqlTitle">Lógica SQL de transformação</h2><div class="code">WITH item_agg AS (...), payment_agg AS (...), review_agg AS (...)
-SELECT orders.order_id, customer_state, delivery_days, delay_days,
-       delayed_flag, items_count, sellers_count, freight_value,
-       payment_value, review_score,
-       CASE WHEN review_score <= 2 THEN 1 ELSE 0 END AS low_review_flag
-FROM orders
-LEFT JOIN customers
-LEFT JOIN item_agg
-LEFT JOIN payment_agg
-LEFT JOIN review_agg;</div><div class="insight"><strong data-i="whyMatter">Por que importa</strong><p data-i="whyMatterText">O mart transforma tabelas transacionais em uma unidade de negócio: a experiência do pedido.</p></div></article></section>
-<section class="section-grid view view-delay hidden"><article class="card"><h2 data-i="delayTitle">Atraso e risco de review</h2><p data-i="delayText">O atraso é tratado como hipótese de negócio e testado contra exposição a baixa avaliação.</p><div id="delayBars"></div></article><article class="card"><h2 data-i="monthTitle">Evidência mensal</h2><p data-i="monthText">Meses com maior atraso tendem a exigir mais atenção operacional.</p><div id="monthBars"></div></article></section>
-<section class="section-grid view view-geography hidden"><article class="card"><h2 data-i="geoTitle">Mesmo estado vs entre estados</h2><p data-i="geoText">A geografia muda o modelo operacional. Pedidos entre estados carregam mais exposição a tempo e frete.</p><div id="geoBars"></div></article><article class="card"><h2 data-i="businessReading">Leitura de negócio</h2><div class="matrix"><div class="box"><span data-i="sameDays">Dias mesmo estado</span><strong id="sameDaysBox">—</strong></div><div class="box"><span data-i="crossDays">Dias entre estados</span><strong id="crossDaysBox">—</strong></div><div class="box"><span data-i="sameFreight">Frete mesmo estado</span><strong id="sameFreightBox">—</strong></div><div class="box"><span data-i="crossFreight">Frete entre estados</span><strong id="crossFreightBox">—</strong></div></div><div class="insight"><strong data-i="opsImplication">Implicação operacional</strong><p data-i="opsText">A promessa de entrega não deve usar a mesma lógica para rotas locais e longas distâncias.</p></div></article></section>
-<section class="section-grid view view-categories hidden"><article class="card"><h2 data-i="catTitle">Exposição por categoria</h2><p data-i="catText">Categorias não são só linhas comerciais. Elas também são grupos de exposição operacional.</p><div id="categoryBars"></div></article><article class="card"><h2 data-i="investigateTitle">Onde investigar primeiro</h2><table><thead><tr><th data-i="category">Categoria</th><th class="num" data-i="orders">Pedidos</th><th class="num" data-i="lowReview">Baixa avaliação</th><th class="num" data-i="freight">Frete</th></tr></thead><tbody id="categoryTable"></tbody></table></article></section>
-<section class="section-grid view view-payments hidden"><article class="card"><h2 data-i="payTitle">Mix de pagamentos</h2><p data-i="payText">Pagamento enriquece a leitura comercial, mas a logística segue como eixo da insatisfação.</p><div id="paymentBars"></div></article><article class="card"><h2 data-i="commercialLens">Lente comercial</h2><table><thead><tr><th data-i="paymentType">Tipo</th><th class="num" data-i="transactions">Transações</th><th class="num" data-i="value">Valor</th><th class="num" data-i="installments">Parcelas</th></tr></thead><tbody id="paymentTable"></tbody></table></article></section>
-<section class="section-grid view view-model hidden"><article class="card"><h2 data-i="modelTitle">Camada preditiva de insatisfação</h2><p data-i="modelText">O alvo é baixa avaliação, definida como review score ≤ 2. O modelo serve para priorização, não para decisão final automatizada.</p><div id="modelBars"></div></article><article class="card"><h2 data-i="featureTitle">História das variáveis</h2><p data-i="featureText">As principais features devem ser lidas como alavancas operacionais.</p><div id="featureBars"></div></article></section>
-<section class="section-grid view view-scenarios hidden"><article class="card"><h2 data-i="scenarioTitle">Simulador de cenários</h2><p data-i="scenarioText">A lógica de cenários leva a análise descritiva para apoio à decisão.</p><div id="scenarioCards"></div></article><article class="card"><h2 data-i="assumptionsTitle">Premissas</h2><table><thead><tr><th data-i="scenario">Cenário</th><th data-i="assumption">Premissa</th><th data-i="reason">Razão</th></tr></thead><tbody id="assumptionTable"></tbody></table></article></section>
-<section class="section-grid view view-conclusion hidden"><article class="card"><h2 data-i="conclusionTitle">Conclusão final</h2><p data-i="conclusionText">Reviews são um sinal tardio de qualidade operacional. O melhor uso analítico é antecipar onde o atrito tende a se repetir.</p><div class="insight"><strong data-i="storyConclusion">Conclusão narrativa</strong><p data-i="storyConclusionText">A oportunidade é sair do monitoramento reativo de avaliações para uma gestão preditiva de risco de experiência.</p></div></article><article class="card"><h2 data-i="decisionAgenda">Agenda de decisão</h2><table><thead><tr><th data-i="decision">Decisão</th><th data-i="action">Ação</th></tr></thead><tbody id="decisionTable"></tbody></table></article></section>
-<p class="footer-note" data-i="footer">O dashboard usa CSVs analíticos derivados para performance. Os brutos ficam em data/raw/ via Git LFS como camada de auditoria.</p>
-</main></div></div>
+<body>
+<div class="app">
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">ol</div>
+        <div>
+          <strong>Olist Ops Lab</strong>
+          <span>Marketplace experience intelligence</span>
+        </div>
+      </div>
+
+      <p class="side-copy">
+        A rebuilt executive analytics panel for marketplace operations: the front end now matches the stronger
+        pipeline, output contract, and validation layer behind the repository.
+      </p>
+
+      <div class="nav-title">Navigation</div>
+      <div class="nav-group">
+        <button class="nav-btn active" data-section="overview">Executive overview</button>
+        <button class="nav-btn" data-section="operations">Operations and network</button>
+        <button class="nav-btn" data-section="model">Risk model and validation</button>
+        <button class="nav-btn" data-section="platform">Pipeline and data contract</button>
+        <button class="nav-btn" data-section="scenarios">Business scenarios</button>
+      </div>
+
+      <div class="status-card">
+        <strong>Framing</strong>
+        <div class="footnote">
+          This project is positioned as marketplace analytics and analytical ML, not as a production-grade decision
+          system. The panel highlights business value and trust limits side by side.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Marketplace analytics | logistics intelligence | reproducible analytical pipeline</div>
+          <h1>When delivery becomes the review.</h1>
+          <p>
+            This dashboard turns the Olist dataset into an executive operating system for customer experience:
+            delivery promise, freight, category exposure, seller complexity, and dissatisfaction risk all connected
+            through one order-experience layer.
+          </p>
+          <div class="chip-row" id="heroChips">
+            <span class="chip">Loading analytical contract...</span>
+          </div>
+        </div>
+
+        <div class="hero-stack">
+          <div class="hero-stat">
+            <span>Best model ROC-AUC</span>
+            <strong id="heroBestModel">--</strong>
+          </div>
+          <div class="hero-stat">
+            <span>Largest route gap</span>
+            <strong id="heroRouteGap">--</strong>
+          </div>
+          <div class="hero-stat">
+            <span>Data contract</span>
+            <strong id="heroContractCount">--</strong>
+          </div>
+          <div class="hero-note">
+            Live view is powered by versioned CSV and JSON exports published from the Python pipeline, then rendered as
+            a static analytical application.
+          </div>
+        </div>
+      </section>
+
+      <section class="section active" id="section-overview">
+        <div class="grid kpis" id="kpiGrid"></div>
+
+        <div class="grid two">
+          <article class="panel">
+            <h2 class="section-title">Pressure map</h2>
+            <p>
+              The operating story is not hidden in the model. It already appears in the descriptive layer: delays,
+              route complexity, freight exposure, and category friction shape review outcomes before any prediction is
+              made.
+            </p>
+            <div class="signal-list" id="pressureMap"></div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Executive readout</h2>
+            <p>
+              This is the fastest recruiter-facing summary of what the project means from a business and analytics
+              perspective.
+            </p>
+            <div class="signal-list" id="readoutList"></div>
+          </article>
+        </div>
+
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Category exposure</h2>
+            <p>
+              Categories are treated as operating exposure groups, not only as commerce buckets. Volume multiplied by
+              dissatisfaction risk becomes a prioritization lens.
+            </p>
+            <table class="table" id="categoryTable">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th class="num">Orders</th>
+                  <th class="num">Low-review rate</th>
+                  <th class="num">Delay rate</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Commercial mix</h2>
+            <p>
+              Payment does not explain dissatisfaction alone, but it adds transaction context and anchors the panel in
+              real marketplace economics.
+            </p>
+            <div class="signal-list" id="paymentList"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="section-operations">
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Same-state vs cross-state routes</h2>
+            <p>
+              Route type behaves like a different operating model. Cross-state delivery carries a materially different
+              time and freight profile.
+            </p>
+            <div class="signal-list" id="routeList"></div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Route summary</h2>
+            <p>
+              These route-level differences translate directly into SLA pressure, freight intensity, and customer
+              expectation risk.
+            </p>
+            <div class="mini-grid" id="routeSummary"></div>
+            <div class="callout" style="margin-top: 16px;">
+              Key business message: one delivery promise policy is too coarse for both local and cross-state flows.
+            </div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <h2 class="section-title">Monthly volatility</h2>
+          <p>
+            Delay spikes and review deterioration are visible over time, which makes the project useful as an
+            operational review artifact instead of a static one-time analysis.
+          </p>
+          <div class="signal-list" id="monthlyList"></div>
+        </article>
+      </section>
+
+      <section class="section" id="section-model">
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Model performance snapshot</h2>
+            <p>
+              The target is intentionally hard and imbalanced. That makes threshold behavior, recall, and calibration
+              more meaningful than accuracy alone.
+            </p>
+            <div class="metric-cards" id="metricCards"></div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Feature importance story</h2>
+            <p>
+              The strongest signals line up with the business thesis: delay, delivery duration, order complexity, and
+              route or category structure dominate the dissatisfaction story.
+            </p>
+            <div class="signal-list" id="featureList"></div>
+          </article>
+        </div>
+
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Confusion matrix view</h2>
+            <p>
+              Concrete counts are easier to reason about than metrics alone when the class distribution is uneven.
+            </p>
+            <div class="matrix-grid" id="matrixGrid"></div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Threshold analysis</h2>
+            <p>
+              Threshold tuning changes how aggressive the risk flag becomes. That matters if the model is used to
+              prioritize interventions rather than score performance in isolation.
+            </p>
+            <table class="table" id="thresholdTable">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Threshold</th>
+                  <th class="num">Precision</th>
+                  <th class="num">Recall</th>
+                  <th class="num">F1</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </article>
+        </div>
+
+        <article class="panel">
+          <h2 class="section-title">Calibration by model</h2>
+          <p>
+            Probability quality matters when predictions may trigger operational actions. This view makes the model
+            layer feel more mature than a default Kaggle-style metric table.
+          </p>
+          <div class="grid equal calibration-grid" id="calibrationGrid"></div>
+        </article>
+      </section>
+
+      <section class="section" id="section-platform">
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Pipeline architecture</h2>
+            <p>
+              The repository now behaves like a small analytical product: raw ingestion, order mart generation,
+              dashboard-facing exports, and validation of the output contract.
+            </p>
+            <div class="stack-list">
+              <div class="stack-item">
+                <strong>1. Raw ingestion</strong>
+                <div class="helper">Reads Olist CSV files from `data/raw/` with a reproducible entry point.</div>
+              </div>
+              <div class="stack-item">
+                <strong>2. Order-experience mart</strong>
+                <div class="helper">Joins orders, items, payments, customers, sellers, and reviews into one business unit.</div>
+              </div>
+              <div class="stack-item">
+                <strong>3. Descriptive serving layer</strong>
+                <div class="helper">Exports route, category, payment, executive, and monthly analytical summaries.</div>
+              </div>
+              <div class="stack-item">
+                <strong>4. ML validation layer</strong>
+                <div class="helper">Adds feature importance, confusion, threshold, and calibration outputs.</div>
+              </div>
+              <div class="stack-item">
+                <strong>5. Dashboard contract tests</strong>
+                <div class="helper">Guards the artifacts that the static site actually consumes.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Export contract</h2>
+            <p>
+              Making the contract explicit is what turns a portfolio dashboard into a more production-real analytical
+              asset.
+            </p>
+            <div class="stack-list" id="contractList"></div>
+          </article>
+        </div>
+
+        <div class="grid equal">
+          <article class="panel">
+            <h2 class="section-title">Data quality checks</h2>
+            <p>
+              This is a lightweight quality layer, but it still makes the repository stronger by exposing missing
+              reviews, undelivered orders, and dimension coverage gaps explicitly.
+            </p>
+            <div class="mini-grid" id="qualityGrid"></div>
+          </article>
+
+          <article class="panel">
+            <h2 class="section-title">Run metadata</h2>
+            <p>
+              Metadata helps reviewers understand provenance quickly: where the raw data came from, how many models were
+              evaluated, and which serving outputs were generated.
+            </p>
+            <table class="table" id="metadataTable">
+              <tbody></tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="section-scenarios">
+        <div class="grid three scenario-grid" id="scenarioGrid"></div>
+        <article class="panel">
+          <h2 class="section-title">Decision framing</h2>
+          <p>
+            The analytical value of this project is not only predictive. It creates an executive language for deciding
+            where to focus operations, customer communication, and marketplace quality programs.
+          </p>
+          <div class="callout">
+            A recruiter should be able to see three things here: strong data modeling, clear business judgment, and a
+            more mature view of analytical ML than default score reporting.
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+</div>
+
 <script>
-const BASE='https://raw.githubusercontent.com/luandarodrigues/olist-delivery-experience-analytics/main/data/';let lang='pt',executive=[],monthly=[],payments=[],geo=[],cats=[],models=[],features=[];
-const D={pt:{brandSub:'história da experiência no marketplace',language:'Idioma',businessLens:'Lente de negócio',lensExec:'Executiva',lensOps:'Operações',lensCx:'Experiência do cliente',lensMl:'Modelo de risco',designNote:'paleta inspirada na Olist: azul-marinho, cards brancos, botões azuis e destaques em azul-claro.',navOverview:'1. História executiva',navRaw:'2. Raw → mart limpo',navDelay:'3. Atraso afeta reviews',navGeo:'4. Geografia muda custo',navCat:'5. Exposição por categoria',navPay:'6. Pagamentos e valor',navModel:'7. Camada preditiva',navScenarios:'8. Cenários de negócio',navConclusion:'9. Conclusão narrativa',kicker:'E-commerce analytics · SQL mart · Python/Pandas · risco preditivo de CX',title:'Quando a entrega vira a avaliação',subtitle:'Dashboard narrativo com dados do marketplace Olist para mostrar como atrito logístico vira insatisfação, pressão de custo e oportunidade operacional.',badgeRaw:'Raw CSVs com Git LFS',badgeDerived:'Bases analíticas derivadas',badgeSql:'Lógica SQL de transformação',badgeScenario:'Camada de cenários',heroCardTitle:'Ecossistema de experiência',heroCardText:'O pedido vira uma unidade de análise que conecta entrega, frete, categoria, pagamento e avaliação.',miniOrders:'pedidos',miniDelay:'atraso',miniReview:'baixa avaliação',miniGmv:'GMV',topStory:'História',topPipeline:'Pipeline',topModel:'Modelo',topScenarios:'Cenários',kOrdersLabel:'Pedidos',kOrdersSmall:'demanda do marketplace',kDeliveredLabel:'Entregues',kDeliveredSmall:'pedidos com data de entrega',kGmvSmall:'incluindo frete',kLowLabel:'Baixa avaliação',kDelayLabel:'Taxa de atraso',kDelaySmall:'após a estimativa',storyTitle:'A história de negócio',storyText:'A base parece comercial, mas a narrativa mais forte é operacional: a entrega define memória, avaliação e confiança futura.',coreThesis:'Tese central',coreText:'Insatisfação não é só produto. É cadeia de experiência: vendedor, frete, distância, promessa de entrega e review pós-compra.',readoutTitle:'Leitura executiva',question:'Pergunta',answer:'Resposta',hyp1:'Hipótese 1',hyp1Text:'Entregas atrasadas têm maior risco de baixa avaliação.',test:'Teste',hyp1Test:'Comparar risco de review baixo em pedidos atrasados.',hyp2:'Hipótese 2',hyp2Text:'Entrega entre estados muda custo e tempo.',hyp2Test:'Comparar médias same-state e cross-state.',hyp3:'Hipótese 3',hyp3Text:'Algumas categorias unem escala e insatisfação.',hyp3Test:'Rankear exposição por volume × review baixo.',rawTitle:'Raw → mart analítico',rawText:'Os CSVs brutos ficam em data/raw/ com Git LFS. O dashboard usa bases derivadas para performance e reprodutibilidade.',sqlTitle:'Lógica SQL de transformação',whyMatter:'Por que importa',whyMatterText:'O mart transforma tabelas transacionais em uma unidade de negócio: a experiência do pedido.',delayTitle:'Atraso e risco de review',delayText:'O atraso é tratado como hipótese de negócio e testado contra exposição a baixa avaliação.',monthTitle:'Evidência mensal',monthText:'Meses com maior atraso tendem a exigir mais atenção operacional.',geoTitle:'Mesmo estado vs entre estados',geoText:'A geografia muda o modelo operacional. Pedidos entre estados carregam mais exposição a tempo e frete.',businessReading:'Leitura de negócio',sameDays:'Dias mesmo estado',crossDays:'Dias entre estados',sameFreight:'Frete mesmo estado',crossFreight:'Frete entre estados',opsImplication:'Implicação operacional',opsText:'A promessa de entrega não deve usar a mesma lógica para rotas locais e longas distâncias.',catTitle:'Exposição por categoria',catText:'Categorias não são só linhas comerciais. Elas também são grupos de exposição operacional.',investigateTitle:'Onde investigar primeiro',category:'Categoria',orders:'Pedidos',lowReview:'Baixa avaliação',freight:'Frete',payTitle:'Mix de pagamentos',payText:'Pagamento enriquece a leitura comercial, mas a logística segue como eixo da insatisfação.',commercialLens:'Lente comercial',paymentType:'Tipo',transactions:'Transações',value:'Valor',installments:'Parcelas',modelTitle:'Camada preditiva de insatisfação',modelText:'O alvo é baixa avaliação, definida como review score ≤ 2. O modelo serve para priorização, não para decisão final automatizada.',featureTitle:'História das variáveis',featureText:'As principais features devem ser lidas como alavancas operacionais.',scenarioTitle:'Simulador de cenários',scenarioText:'A lógica de cenários leva a análise descritiva para apoio à decisão.',assumptionsTitle:'Premissas',scenario:'Cenário',assumption:'Premissa',reason:'Razão',conclusionTitle:'Conclusão final',conclusionText:'Reviews são um sinal tardio de qualidade operacional. O melhor uso analítico é antecipar onde o atrito tende a se repetir.',storyConclusion:'Conclusão narrativa',storyConclusionText:'A oportunidade é sair do monitoramento reativo de avaliações para uma gestão preditiva de risco de experiência.',decisionAgenda:'Agenda de decisão',decision:'Decisão',action:'Ação',footer:'O dashboard usa CSVs analíticos derivados para performance. Os brutos ficam em data/raw/ via Git LFS como camada de auditoria.'},en:{brandSub:'marketplace experience story',language:'Language',businessLens:'Business lens',lensExec:'Executive',lensOps:'Operations',lensCx:'Customer experience',lensMl:'Risk model',designNote:'Olist-inspired palette: deep navy, white SaaS cards, blue buttons and light-blue highlights.',navOverview:'1. Executive story',navRaw:'2. Raw → clean mart',navDelay:'3. Delay hurts reviews',navGeo:'4. Geography changes cost',navCat:'5. Category exposure',navPay:'6. Payments and value',navModel:'7. Predictive layer',navScenarios:'8. Business scenarios',navConclusion:'9. Final storyline',kicker:'E-commerce analytics · SQL mart · Python/Pandas · predictive CX risk',title:'When delivery becomes the review',subtitle:'A business storytelling dashboard using Olist marketplace data to show how logistics friction becomes customer dissatisfaction, cost pressure and operational opportunity.',badgeRaw:'Raw CSVs with Git LFS',badgeDerived:'Derived analytical datasets',badgeSql:'SQL transformation logic',badgeScenario:'Scenario layer',heroCardTitle:'Experience ecosystem',heroCardText:'Each order becomes an analytical unit connecting delivery, freight, category, payment and review.',miniOrders:'orders',miniDelay:'delay',miniReview:'low review',miniGmv:'GMV',topStory:'Story',topPipeline:'Pipeline',topModel:'Model',topScenarios:'Scenarios',kOrdersLabel:'Orders',kOrdersSmall:'marketplace demand',kDeliveredLabel:'Delivered',kDeliveredSmall:'orders with delivery date',kGmvSmall:'including freight',kLowLabel:'Low review rate',kDelayLabel:'Delay rate',kDelaySmall:'late versus estimate',storyTitle:'The business story',storyText:'The dataset looks commercial, but the strongest story is operational: delivery performance becomes memory, rating and future trust.',coreThesis:'Core thesis',coreText:'Dissatisfaction is not only a product issue. It is an experience chain: seller, freight, distance, delivery promise and post-purchase review.',readoutTitle:'Executive readout',question:'Question',answer:'Answer',hyp1:'Hypothesis 1',hyp1Text:'Late deliveries have higher low-review risk.',test:'Test',hyp1Test:'Compare low-review risk among delayed orders.',hyp2:'Hypothesis 2',hyp2Text:'Cross-state delivery changes cost and time.',hyp2Test:'Compare same-state and cross-state averages.',hyp3:'Hypothesis 3',hyp3Text:'Some categories combine scale and dissatisfaction.',hyp3Test:'Rank exposure by volume × low review.',rawTitle:'Raw → analytical mart',rawText:'Raw CSVs are stored in data/raw/ with Git LFS. The dashboard uses derived datasets for speed and reproducibility.',sqlTitle:'SQL transformation logic',whyMatter:'Why it matters',whyMatterText:'The mart turns transactional tables into one business unit: the order experience.',delayTitle:'Delay and review risk',delayText:'Delay is treated as a business hypothesis and tested against low-review exposure.',monthTitle:'Monthly evidence',monthText:'Months with higher delays tend to require closer operational attention.',geoTitle:'Same-state vs cross-state',geoText:'Geography changes the operating model. Cross-state orders carry more exposure to time and freight.',businessReading:'Business reading',sameDays:'Same-state days',crossDays:'Cross-state days',sameFreight:'Same-state freight',crossFreight:'Cross-state freight',opsImplication:'Operational implication',opsText:'Delivery promise logic should differ for local and long-distance routes.',catTitle:'Category exposure',catText:'Categories are not only commercial lines. They are operational exposure groups.',investigateTitle:'Where to investigate first',category:'Category',orders:'Orders',lowReview:'Low review',freight:'Freight',payTitle:'Payment mix',payText:'Payment enriches the commercial lens, but logistics remains the core dissatisfaction axis.',commercialLens:'Commercial lens',paymentType:'Payment type',transactions:'Transactions',value:'Value',installments:'Installments',modelTitle:'Predictive dissatisfaction layer',modelText:'The target is low review, defined as review score ≤ 2. The model is a prioritization layer, not an automated final decision system.',featureTitle:'Feature story',featureText:'The strongest features should be read as operational levers.',scenarioTitle:'Scenario simulator',scenarioText:'Scenario logic moves descriptive analytics into decision support.',assumptionsTitle:'Assumptions',scenario:'Scenario',assumption:'Assumption',reason:'Reason',conclusionTitle:'Final conclusion',conclusionText:'Reviews are a delayed signal of operational quality. The best analytical use is to anticipate where friction may repeat.',storyConclusion:'Storytelling conclusion',storyConclusionText:'The opportunity is to shift from reactive review monitoring to predictive experience risk management.',decisionAgenda:'Decision agenda',decision:'Decision',action:'Action',footer:'The dashboard uses derived analytical CSVs for performance. Raw files are stored in data/raw/ with Git LFS as the audit layer.'}};
-function t(k){return D[lang][k]||k}function renderText(){document.documentElement.lang=lang==='pt'?'pt-BR':'en';document.querySelectorAll('[data-i]').forEach(el=>el.textContent=t(el.dataset.i));ptBtn.classList.toggle('active',lang==='pt');enBtn.classList.toggle('active',lang==='en');renderTables();if(executive.length)render()}
-function readoutRows(){return lang==='pt'?[['O que mais afeta CX?','Atraso e tempo longo de entrega.'],['Onde o custo aumenta?','Entregas entre estados e rotas com frete maior.'],['Onde agir primeiro?','Pedidos atrasados e categorias de alto volume com maior exposição a reviews baixos.'],['O que ML adiciona?','Uma triagem de risco para baixa avaliação antes de ela virar nota pública.']]:[['What hurts CX most?','Delay and long delivery lead time.'],['Where does cost increase?','Cross-state deliveries and higher freight routes.'],['Where to act first?','Late orders and high-volume categories with high low-review exposure.'],['What can ML add?','A risk screen for likely low reviews before they become public ratings.']]}
-function renderTables(){readoutTable.innerHTML=readoutRows().map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');assumptionTable.innerHTML=(lang==='pt'?[['Resgate de atraso','Reduzir exposição a reviews baixos em pedidos atrasados','Atraso é um sinal forte de risco em CX.'],['Foco por categoria','Atuar em categorias de alta escala e alto risco','Combina tamanho com insatisfação.'],['Controle cross-state','Separar lógica de SLA para longas distâncias','Rotas entre estados se comportam diferente.']]:[['Delay rescue','Reduce low-review exposure among late orders','Late delivery is a strong CX signal.'],['Category focus','Act on high-scale, high-risk categories','Combines size with dissatisfaction.'],['Cross-state control','Separate long-distance SLA logic','Cross-state routes behave differently.']]).map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');decisionTable.innerHTML=(lang==='pt'?[['O que monitorar diariamente?','Risco de atraso, dias de entrega, rotas entre estados e categorias críticas.'],['O que modelar?','Probabilidade de baixa avaliação antes do feedback do cliente.'],['O que melhorar?','Acurácia da promessa, logística de sellers, exposição de frete e comunicação com cliente.']]:[['What to monitor daily?','Delay risk, delivery days, cross-state routes and high-risk categories.'],['What to model?','Probability of low review before customer feedback.'],['What to improve?','Promise accuracy, seller logistics, freight exposure and customer communication.']]).map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
-function parseCSV(text){const rows=[];let row=[],cur='',q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'){if(q&&n==='"'){cur+='"';i++}else q=!q}else if(c===','&&!q){row.push(cur);cur=''}else if((c==='\n'||c==='\r')&&!q){if(cur||row.length){row.push(cur);rows.push(row);row=[];cur=''}if(c==='\r'&&n==='\n')i++}else cur+=c}if(cur||row.length){row.push(cur);rows.push(row)}const h=rows.shift();return rows.filter(r=>r.length>1).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]??''])))}
-async function load(file){return parseCSV(await fetch(BASE+file).then(r=>{if(!r.ok)throw new Error(file);return r.text()}))}function n(x){return +x||0}function fmt(x){return new Intl.NumberFormat(lang==='pt'?'pt-BR':'en-US').format(Math.round(+x||0))}function money(x){return 'R$ '+new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0}).format(+x||0)}function pct(x){return ((+x||0)*100).toFixed(1).replace('.',lang==='pt'?',':'.')+'%'}function pctAlready(x){return (+x||0).toFixed(1).replace('.',lang==='pt'?',':'.')+'%'}function daysLabel(x){return (+x||0).toFixed(1).replace('.',lang==='pt'?',':'.')+(lang==='pt'?' dias':' days')}
-function barRows(rows,label='label',value='value',color='deep',asPct=false){const max=Math.max(...rows.map(r=>+r[value]),1);return rows.map(r=>`<div class="bar-row"><div class="bar-label">${r[label]}${r.sub?`<small>${r.sub}</small>`:''}</div><div class="bar-bg"><div class="bar-fill ${r.color||color}" style="width:${Math.max(2,+r[value]/max*100)}%"></div></div><div class="bar-val">${r.display|| (asPct?pct(+r[value]):r.format?r.format(+r[value]):fmt(+r[value]))}</div></div>`).join('')}
-function setView(v){document.querySelectorAll('.view').forEach(x=>x.classList.add('hidden'));document.querySelectorAll('.view-'+v).forEach(x=>x.classList.remove('hidden'));document.querySelectorAll('#viewSlicer button,.top-actions button').forEach(b=>b.classList.toggle('active',b.dataset.view===v))}function setLens(l){document.querySelectorAll('#lensSlicer button').forEach(b=>b.classList.toggle('active',b.dataset.lens===l));if(l==='ops')setView('delay');if(l==='cx')setView('categories');if(l==='ml')setView('model');if(l==='exec')setView('overview')}
-function render(){const e=executive[0];kOrders.textContent=fmt(e.orders);kDelivered.textContent=fmt(e.delivered_orders);kGmv.textContent=money(e.total_gmv);kLowReview.textContent=pctAlready(e.low_review_rate_pct);kDelay.textContent=pctAlready(e.delay_rate_pct);miniA.textContent=fmt(e.orders);miniB.textContent=pctAlready(e.delay_rate_pct);miniC.textContent=pctAlready(e.low_review_rate_pct);miniD.textContent=money(e.total_gmv);const avgDelivery=n(e.avg_delivery_days),avgReview=n(e.avg_review);storyBars.innerHTML=barRows([{label:lang==='pt'?'Exposição a baixa avaliação':'Low review exposure',value:n(e.low_review_rate_pct),display:pctAlready(e.low_review_rate_pct),color:'red',sub:'review score ≤ 2'},{label:lang==='pt'?'Taxa de atraso':'Delivery delay rate',value:n(e.delay_rate_pct),display:pctAlready(e.delay_rate_pct),color:'orange',sub:lang==='pt'?'entregue após a estimativa':'delivered after estimate'},{label:lang==='pt'?'Tempo médio de entrega':'Average delivery time',value:avgDelivery,display:daysLabel(avgDelivery),color:'blue',sub:lang==='pt'?'compra até entrega':'purchase to delivery'},{label:lang==='pt'?'Nota média':'Average review score',value:avgReview,display:avgReview.toFixed(2),color:'green',sub:lang==='pt'?'avaliação do cliente':'customer rating'}]);
-const g=geo.map(r=>({label:r.same_state==='True'?(lang==='pt'?'Mesmo estado':'Same-state'):(lang==='pt'?'Entre estados':'Cross-state'),days:n(r.avg_delivery_days),freight:n(r.avg_freight),delay:n(r.delay_rate_pct),color:r.same_state==='True'?'green':'orange'}));geoBars.innerHTML=barRows(g.map(x=>({label:x.label,value:x.days,display:daysLabel(x.days),color:x.color,sub:pctAlready(x.delay)+' '+(lang==='pt'?'atraso':'delay rate')})));const same=g[0],cross=g[1];sameDaysBox.textContent=same?.days.toFixed(1).replace('.',lang==='pt'?',':'.')||'—';crossDaysBox.textContent=cross?.days.toFixed(1).replace('.',lang==='pt'?',':'.')||'—';sameFreightBox.textContent=money(same?.freight||0);crossFreightBox.textContent=money(cross?.freight||0);hCross.textContent=(cross&&same?(cross.days-same.days).toFixed(1).replace('.',lang==='pt'?',':'.')+(lang==='pt'?' dias':' days gap'):'—');
-const topMonth=[...monthly].sort((a,b)=>n(b.delay_rate)-n(a.delay_rate)).slice(0,8);monthBars.innerHTML=barRows(topMonth.map(r=>({label:r.purchase_month,value:n(r.delay_rate),display:pct(n(r.delay_rate)),color:'orange',sub:(lang==='pt'?'nota média ':'avg review ')+n(r.avg_review).toFixed(2)})),undefined,undefined,undefined,true);delayBars.innerHTML=barRows([{label:lang==='pt'?'Taxa de atraso':'Delay rate',value:n(e.delay_rate_pct),display:pctAlready(e.delay_rate_pct),color:'orange',sub:lang==='pt'?'entregas atrasadas':'overall late deliveries'},{label:lang==='pt'?'Baixa avaliação':'Low review rate',value:n(e.low_review_rate_pct),display:pctAlready(e.low_review_rate_pct),color:'red',sub:'score ≤ 2'},{label:lang==='pt'?'Dias médios de entrega':'Avg delivery days',value:n(e.avg_delivery_days),display:daysLabel(e.avg_delivery_days),color:'blue',sub:lang==='pt'?'tempo total':'overall lead time'}]);hDelay.textContent=lang==='pt'?'risco visível':'visible risk';
-const cat=[...cats].sort((a,b)=>n(b.orders)*n(b.low_review_rate)-n(a.orders)*n(a.low_review_rate)).slice(0,10);categoryBars.innerHTML=barRows(cat.map(r=>({label:r.product_category_name_english,value:n(r.orders)*n(r.low_review_rate),display:fmt(n(r.orders)*n(r.low_review_rate)),sub:pct(n(r.low_review_rate))+' '+(lang==='pt'?'review baixo':'low review')+' · '+fmt(r.orders)+' '+(lang==='pt'?'pedidos':'orders'),color:'red'})));categoryTable.innerHTML=cat.map(r=>`<tr><td>${r.product_category_name_english}</td><td class="num">${fmt(r.orders)}</td><td class="num">${pct(n(r.low_review_rate))}</td><td class="num">${money(r.freight)}</td></tr>`).join('');hCat.textContent=cat[0]?.product_category_name_english||'—';
-paymentBars.innerHTML=barRows(payments.map(r=>({label:r.payment_type,value:n(r.transactions),display:fmt(r.transactions),sub:money(r.value)+' total',color:r.payment_type==='credit_card'?'blue':'deep'})));paymentTable.innerHTML=payments.map(r=>`<tr><td>${r.payment_type}</td><td class="num">${fmt(r.transactions)}</td><td class="num">${money(r.value)}</td><td class="num">${n(r.avg_installments).toFixed(1)}</td></tr>`).join('');modelBars.innerHTML=barRows(models.flatMap(m=>[{label:m.model+' · ROC-AUC',value:n(m.roc_auc),display:n(m.roc_auc).toFixed(3),color:'green'},{label:m.model+' · Recall',value:n(m.recall),display:n(m.recall).toFixed(3),color:'orange'},{label:m.model+' · F1',value:n(m.f1),display:n(m.f1).toFixed(3),color:'purple'}]));featureBars.innerHTML=barRows(features.map(f=>({label:f.feature,value:n(f.importance),display:n(f.importance).toFixed(3),color:f.feature.includes('delay')?'red':f.feature.includes('delivery')?'orange':'blue'})).slice(0,10));
-rawTable.innerHTML=`<table><thead><tr><th>Layer</th><th>Path</th><th>Role</th></tr></thead><tbody><tr><td>Raw source</td><td>data/raw/*.csv</td><td>${lang==='pt'?'Camada de auditoria via Git LFS':'Audit layer stored with Git LFS'}</td></tr><tr><td>SQL mart</td><td>sql/01_build_order_experience_mart.sql</td><td>${lang==='pt'?'Lógica de transformação por pedido':'Order-level transformation logic'}</td></tr><tr><td>Dashboard data</td><td>data/*.csv</td><td>${lang==='pt'?'Bases derivadas para o GitHub Pages':'Derived tables optimized for GitHub Pages'}</td></tr><tr><td>Live panel</td><td>docs/index.html</td><td>${lang==='pt'?'Dashboard narrativo':'Storytelling dashboard'}</td></tr></tbody></table>`;
-const lateReviews=Math.round(n(e.delivered_orders)*n(e.low_review_rate_pct)/100*.2),delayRecover=Math.round(n(e.delivered_orders)*n(e.delay_rate_pct)/100*.15);scenarioCards.innerHTML=`<div class="scenario"><strong>${lang==='pt'?'Resgate de atraso':'Delay rescue'}</strong><span>${lang==='pt'?'Se 15% dos casos de atraso fossem priorizados com comunicação proativa ou controle de SLA.':'If 15% of delay cases were rescued with proactive communication or SLA control.'}</span><div class="impact">${fmt(delayRecover)} ${lang==='pt'?'pedidos':'orders'}</div></div><div class="scenario"><strong>${lang==='pt'?'Foco por categoria':'Category focus'}</strong><span>${lang==='pt'?'Começar pela categoria que combina escala e exposição a review baixo.':'Start with the category that combines scale and low-review exposure.'}</span><div class="impact">${cat[0]?.product_category_name_english||'—'}</div></div><div class="scenario"><strong>${lang==='pt'?'Redução de risco':'Review risk reduction'}</strong><span>${lang==='pt'?'Se a exposição a reviews baixos cair 20% nos segmentos prioritários.':'If low-review exposure fell by 20% in priority segments.'}</span><div class="impact">${fmt(lateReviews)} ${lang==='pt'?'reviews em risco':'reviews at risk'}</div></div>`}
-async function init(){renderTables();try{[executive,monthly,payments,geo,cats,models,features]=await Promise.all([load('executive_summary.csv'),load('monthly_orders_revenue.csv'),load('payment_summary.csv'),load('same_state_vs_cross_state_delivery.csv'),load('top_categories_summary.csv'),load('model_metrics.csv'),load('feature_importance.csv')]);render()}catch(e){storyBars.textContent='Could not load dashboard datasets. Check files in /data.';console.error(e)}}
-document.querySelectorAll('#viewSlicer button,.top-actions button').forEach(b=>b.onclick=()=>setView(b.dataset.view));document.querySelectorAll('#lensSlicer button').forEach(b=>b.onclick=()=>setLens(b.dataset.lens));ptBtn.onclick=()=>{lang='pt';renderText()};enBtn.onclick=()=>{lang='en';renderText()};init();
+const BASE = location.hostname.endsWith("github.io")
+  ? "https://raw.githubusercontent.com/luandarodrigues/olist-delivery-experience-analytics/main/data/"
+  : "../data/";
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+
+    if (char === "\"") {
+      if (inQuotes && next === "\"") {
+        current += "\"";
+        index += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === "," && !inQuotes) {
+      row.push(current);
+      current = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (current || row.length) {
+        row.push(current);
+        rows.push(row);
+        row = [];
+        current = "";
+      }
+      if (char === "\r" && next === "\n") {
+        index += 1;
+      }
+    } else {
+      current += char;
+    }
+  }
+
+  if (current || row.length) {
+    row.push(current);
+    rows.push(row);
+  }
+
+  const headers = rows.shift() || [];
+  return rows
+    .filter((entry) => entry.length)
+    .map((entry) => Object.fromEntries(headers.map((header, idx) => [header, entry[idx] ?? ""])));
+}
+
+async function loadCSV(file) {
+  const response = await fetch(BASE + file);
+  if (!response.ok) {
+    throw new Error(`Could not load ${file}`);
+  }
+  return parseCSV(await response.text());
+}
+
+async function loadJSON(file) {
+  const response = await fetch(BASE + file);
+  if (!response.ok) {
+    throw new Error(`Could not load ${file}`);
+  }
+  return response.json();
+}
+
+function number(value) {
+  return Number(value || 0);
+}
+
+function formatInt(value) {
+  return new Intl.NumberFormat("en-US").format(Math.round(number(value)));
+}
+
+function formatMoney(value) {
+  return `R$ ${new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(number(value))}`;
+}
+
+function formatDecimal(value, digits = 3) {
+  return number(value).toFixed(digits);
+}
+
+function formatPercent(value, digits = 1) {
+  return `${number(value).toFixed(digits)}%`;
+}
+
+function formatShare(value, digits = 1) {
+  return `${(number(value) * 100).toFixed(digits)}%`;
+}
+
+function setSection(sectionName) {
+  document.querySelectorAll(".nav-btn").forEach((button) => {
+    button.classList.toggle("active", button.dataset.section === sectionName);
+  });
+  document.querySelectorAll(".section").forEach((section) => {
+    section.classList.toggle("active", section.id === `section-${sectionName}`);
+  });
+}
+
+function getRouteLabel(value) {
+  return String(value).toLowerCase() === "true" ? "Same-state route" : "Cross-state route";
+}
+
+function averageCalibrationGap(rows) {
+  const gaps = rows.map((row) => Math.abs(number(row.mean_predicted_probability) - number(row.observed_rate)));
+  return gaps.reduce((sum, value) => sum + value, 0) / gaps.length;
+}
+
+function bestThreshold(thresholds, modelName) {
+  return thresholds
+    .filter((row) => row.model === modelName)
+    .sort((left, right) => number(right.f1) - number(left.f1))[0];
+}
+
+function renderHero(summary, routes, metrics, metadata) {
+  const bestModel = [...metrics].sort((left, right) => number(right.roc_auc) - number(left.roc_auc))[0];
+  const sortedRoutes = [...routes].sort((left, right) => number(right.avg_delivery_days) - number(left.avg_delivery_days));
+  const routeGap = sortedRoutes.length > 1
+    ? number(sortedRoutes[0].avg_delivery_days) - number(sortedRoutes[1].avg_delivery_days)
+    : 0;
+
+  document.getElementById("heroBestModel").textContent = `${bestModel.model} ${formatDecimal(bestModel.roc_auc)}`;
+  document.getElementById("heroRouteGap").textContent = `${formatDecimal(routeGap, 1)} days`;
+  document.getElementById("heroContractCount").textContent = `${metadata.dashboard_exports.length} exports`;
+
+  const chips = [
+    `${formatInt(summary.orders)} orders`,
+    `${formatMoney(summary.total_gmv)} GMV`,
+    `${formatPercent(summary.delay_rate_pct)} delay rate`,
+    `${formatPercent(summary.low_review_rate_pct)} low-review rate`,
+    `${metadata.models.length} evaluated models`
+  ];
+
+  document.getElementById("heroChips").innerHTML = chips.map((chip) => `<span class="chip">${chip}</span>`).join("");
+}
+
+function renderKpis(summary, calibrationRows) {
+  const rfGap = averageCalibrationGap(calibrationRows.filter((row) => row.model === "Random Forest"));
+  const cards = [
+    { label: "Orders", value: formatInt(summary.orders), foot: "Marketplace demand base" },
+    { label: "Delivered orders", value: formatInt(summary.delivered_orders), foot: "Operationally completed orders" },
+    { label: "GMV", value: formatMoney(summary.total_gmv), foot: "Products plus freight" },
+    { label: "Low-review rate", value: formatPercent(summary.low_review_rate_pct), foot: "Score less than or equal to 2" },
+    { label: "Calibration gap", value: formatDecimal(rfGap), foot: "Random Forest mean absolute gap" }
+  ];
+
+  document.getElementById("kpiGrid").innerHTML = cards.map((card) => `
+    <div class="kpi-card">
+      <span class="metric-label">${card.label}</span>
+      <strong class="metric-value">${card.value}</strong>
+      <div class="metric-foot">${card.foot}</div>
+    </div>
+  `).join("");
+}
+
+function renderPressureMap(summary, routes, categories) {
+  const routeGap = routes.length > 1
+    ? Math.abs(number(routes[0].avg_delivery_days) - number(routes[1].avg_delivery_days))
+    : 0;
+  const topCategory = [...categories]
+    .sort((left, right) => (number(right.orders) * number(right.low_review_rate)) - (number(left.orders) * number(left.low_review_rate)))[0] || {
+      product_category_name_english: "n/a",
+      orders: 0,
+      low_review_rate: 0
+    };
+  const cards = [
+    {
+      title: "Low-review exposure",
+      value: summary.low_review_rate_pct,
+      display: formatPercent(summary.low_review_rate_pct),
+      helper: "Visible dissatisfaction share in delivered reviewed orders",
+      tone: "red"
+    },
+    {
+      title: "Delay pressure",
+      value: summary.delay_rate_pct,
+      display: formatPercent(summary.delay_rate_pct),
+      helper: "Late-versus-promised orders",
+      tone: "amber"
+    },
+    {
+      title: "Route complexity gap",
+      value: routeGap,
+      display: `${formatDecimal(routeGap, 1)} days`,
+      helper: "Average delivery gap between route types",
+      tone: "green"
+    },
+    {
+      title: "Highest category exposure",
+      value: number(topCategory.orders) * number(topCategory.low_review_rate),
+      display: topCategory.product_category_name_english,
+      helper: `${formatInt(topCategory.orders)} orders | ${formatShare(topCategory.low_review_rate)} low-review rate`,
+      tone: "red"
+    }
+  ];
+  const maxValue = Math.max(...cards.map((card) => number(card.value)), 1);
+
+  document.getElementById("pressureMap").innerHTML = cards.map((card) => `
+    <div class="signal-item">
+      <div class="signal-head">
+        <div class="signal-title">${card.title}</div>
+        <div class="score">${card.display}</div>
+      </div>
+      <div class="helper">${card.helper}</div>
+      <div class="bar-track">
+        <div class="bar-fill ${card.tone}" style="width:${Math.max((number(card.value) / maxValue) * 100, 6)}%"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderReadout(summary, routes, payments, categories) {
+  const crossState = routes.find((row) => String(row.same_state).toLowerCase() === "false") || routes[0] || {
+    same_state: false,
+    avg_delivery_days: 0,
+    avg_freight: 0
+  };
+  const sameState = routes.find((row) => String(row.same_state).toLowerCase() === "true") || routes[1] || routes[0] || {
+    same_state: true,
+    avg_delivery_days: 0
+  };
+  const dominantPayment = [...payments].sort((left, right) => number(right.value) - number(left.value))[0] || {
+    payment_type: "n/a",
+    value: 0,
+    transactions: 0
+  };
+  const priorityCategory = [...categories]
+    .sort((left, right) => (number(right.orders) * number(right.low_review_rate)) - (number(left.orders) * number(left.low_review_rate)))[0] || {
+      product_category_name_english: "n/a",
+      low_review_rate: 0
+    };
+
+  const items = [
+    {
+      title: "Core business thesis",
+      copy: "Customer dissatisfaction behaves like the visible end of a logistics chain, not only a product signal."
+    },
+    {
+      title: "Where cost and time expand",
+      copy: `${getRouteLabel(crossState.same_state)} averages ${formatDecimal(crossState.avg_delivery_days, 1)} days and ${formatMoney(crossState.avg_freight)} freight versus ${formatDecimal(sameState.avg_delivery_days, 1)} days locally.`
+    },
+    {
+      title: "Where to act first",
+      copy: `${priorityCategory.product_category_name_english} combines high scale with ${formatShare(priorityCategory.low_review_rate)} low-review risk.`
+    },
+    {
+      title: "Commercial anchor",
+      copy: `${dominantPayment.payment_type} dominates payment value with ${formatMoney(dominantPayment.value)} across ${formatInt(dominantPayment.transactions)} transactions.`
+    }
+  ];
+
+  document.getElementById("readoutList").innerHTML = items.map((item) => `
+    <div class="signal-item">
+      <div class="signal-title">${item.title}</div>
+      <div class="helper">${item.copy}</div>
+    </div>
+  `).join("");
+}
+
+function renderCategoryTable(categories) {
+  const ranked = [...categories]
+    .sort((left, right) => (number(right.orders) * number(right.low_review_rate)) - (number(left.orders) * number(left.low_review_rate)))
+    .slice(0, 6);
+  document.querySelector("#categoryTable tbody").innerHTML = ranked.map((row) => `
+    <tr>
+      <td>${row.product_category_name_english}</td>
+      <td class="num">${formatInt(row.orders)}</td>
+      <td class="num">${formatShare(row.low_review_rate)}</td>
+      <td class="num">${formatShare(row.delay_rate)}</td>
+    </tr>
+  `).join("");
+}
+
+function renderPayments(payments) {
+  const maxTransactions = Math.max(...payments.map((row) => number(row.transactions)), 1);
+  document.getElementById("paymentList").innerHTML = payments.map((row) => `
+    <div class="signal-item">
+      <div class="signal-head">
+        <div class="signal-title">${row.payment_type}</div>
+        <div class="score">${formatInt(row.transactions)}</div>
+      </div>
+      <div class="helper">${formatMoney(row.value)} total payment value | ${formatDecimal(row.avg_installments, 1)} average installments</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(number(row.transactions) / maxTransactions) * 100}%"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderRoutes(routes) {
+  const maxDays = Math.max(...routes.map((row) => number(row.avg_delivery_days)), 1);
+  document.getElementById("routeList").innerHTML = routes.map((row) => `
+    <div class="signal-item">
+      <div class="signal-head">
+        <div class="signal-title">${getRouteLabel(row.same_state)}</div>
+        <div class="score">${formatDecimal(row.avg_delivery_days, 1)}d</div>
+      </div>
+      <div class="helper">${formatMoney(row.avg_freight)} average freight | ${formatPercent(row.delay_rate_pct)} delay rate</div>
+      <div class="bar-track">
+        <div class="bar-fill green" style="width:${(number(row.avg_delivery_days) / maxDays) * 100}%"></div>
+      </div>
+    </div>
+  `).join("");
+
+  const cross = routes.find((row) => String(row.same_state).toLowerCase() === "false") || routes[0] || {
+    avg_delivery_days: 0,
+    avg_freight: 0
+  };
+  const same = routes.find((row) => String(row.same_state).toLowerCase() === "true") || routes[1] || routes[0] || {
+    avg_delivery_days: 0,
+    avg_freight: 0
+  };
+  const summaryCards = [
+    ["Same-state days", `${formatDecimal(same.avg_delivery_days, 1)}d`],
+    ["Cross-state days", `${formatDecimal(cross.avg_delivery_days, 1)}d`],
+    ["Same-state freight", formatMoney(same.avg_freight)],
+    ["Cross-state freight", formatMoney(cross.avg_freight)]
+  ];
+  document.getElementById("routeSummary").innerHTML = summaryCards.map(([label, value]) => `
+    <div class="mini-block">
+      <span class="mini-label">${label}</span>
+      <strong class="mini-value">${value}</strong>
+    </div>
+  `).join("");
+}
+
+function renderMonthly(monthly) {
+  const ranked = [...monthly].sort((left, right) => number(right.delay_rate) - number(left.delay_rate)).slice(0, 6);
+  const maxDelay = Math.max(...ranked.map((row) => number(row.delay_rate)), 1);
+  document.getElementById("monthlyList").innerHTML = ranked.map((row) => `
+    <div class="signal-item">
+      <div class="signal-head">
+        <div class="signal-title">${row.purchase_month}</div>
+        <div class="score">${formatShare(row.delay_rate)}</div>
+      </div>
+      <div class="helper">${formatMoney(row.revenue)} revenue | ${formatDecimal(row.avg_review, 2)} average review | ${formatDecimal(row.avg_delivery_days, 1)} delivery days</div>
+      <div class="bar-track">
+        <div class="bar-fill amber" style="width:${(number(row.delay_rate) / maxDelay) * 100}%"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderModelCards(metrics, thresholds) {
+  document.getElementById("metricCards").innerHTML = metrics.map((row) => {
+    const threshold = bestThreshold(thresholds, row.model);
+    return `
+      <div class="metric-card">
+        <div class="metric-head">
+          <div>
+            <div class="metric-title">${row.model}</div>
+            <div class="helper">Balanced evaluation for a hard, imbalanced CX risk target.</div>
+          </div>
+          <div class="score">${formatDecimal(row.roc_auc)}</div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-block">
+            <span class="mini-label">Accuracy</span>
+            <strong class="mini-value">${formatDecimal(row.accuracy)}</strong>
+          </div>
+          <div class="mini-block">
+            <span class="mini-label">Recall</span>
+            <strong class="mini-value">${formatDecimal(row.recall)}</strong>
+          </div>
+          <div class="mini-block">
+            <span class="mini-label">Precision</span>
+            <strong class="mini-value">${formatDecimal(row.precision)}</strong>
+          </div>
+          <div class="mini-block">
+            <span class="mini-label">Best threshold F1</span>
+            <strong class="mini-value">${formatDecimal(threshold.f1)}</strong>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderFeatures(features) {
+  const maxImportance = Math.max(...features.map((row) => number(row.importance)), 1);
+  document.getElementById("featureList").innerHTML = features.slice(0, 8).map((row, index) => `
+    <div class="signal-item">
+      <div class="signal-head">
+        <div class="signal-title">${row.feature}</div>
+        <div class="score">${formatDecimal(number(row.importance) * 100, 2)}</div>
+      </div>
+      <div class="helper">${index < 2 ? "Primary operating signal" : index < 5 ? "Important supporting signal" : "Secondary but useful context"}</div>
+      <div class="bar-track">
+        <div class="bar-fill ${index < 2 ? "red" : index < 5 ? "amber" : ""}" style="width:${(number(row.importance) / maxImportance) * 100}%"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderConfusion(confusionRows) {
+  document.getElementById("matrixGrid").innerHTML = confusionRows.map((row) => `
+    <div class="matrix-card">
+      <div class="matrix-head">
+        <div class="matrix-title">${row.model}</div>
+        <div class="helper">Predicted low-review risk versus observed outcome.</div>
+      </div>
+      <div class="matrix-boxes">
+        <div class="matrix-box">
+          <span class="mini-label">True negative</span>
+          <strong class="matrix-number">${formatInt(row.true_negative)}</strong>
+        </div>
+        <div class="matrix-box">
+          <span class="mini-label">False positive</span>
+          <strong class="matrix-number">${formatInt(row.false_positive)}</strong>
+        </div>
+        <div class="matrix-box">
+          <span class="mini-label">False negative</span>
+          <strong class="matrix-number">${formatInt(row.false_negative)}</strong>
+        </div>
+        <div class="matrix-box">
+          <span class="mini-label">True positive</span>
+          <strong class="matrix-number">${formatInt(row.true_positive)}</strong>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderThresholds(thresholds) {
+  const rows = [...thresholds]
+    .sort((left, right) => number(right.f1) - number(left.f1))
+    .slice(0, 8);
+  document.querySelector("#thresholdTable tbody").innerHTML = rows.map((row) => `
+    <tr>
+      <td>${row.model}</td>
+      <td>${row.threshold}</td>
+      <td class="num">${formatDecimal(row.precision)}</td>
+      <td class="num">${formatDecimal(row.recall)}</td>
+      <td class="num">${formatDecimal(row.f1)}</td>
+    </tr>
+  `).join("");
+}
+
+function renderCalibration(calibrationRows) {
+  const grouped = calibrationRows.reduce((accumulator, row) => {
+    accumulator[row.model] ||= [];
+    accumulator[row.model].push(row);
+    return accumulator;
+  }, {});
+
+  document.getElementById("calibrationGrid").innerHTML = Object.entries(grouped).map(([model, rows]) => {
+    const maxObserved = Math.max(...rows.map((row) => number(row.observed_rate)), 1);
+    const gap = averageCalibrationGap(rows);
+    return `
+      <div class="calibration-card">
+        <strong>${model}</strong>
+        ${rows.map((row) => `
+          <div class="calibration-row">
+            <div class="mini-label">Bin ${row.bin}</div>
+            <div class="bar-track">
+              <div class="bar-fill green" style="width:${(number(row.observed_rate) / maxObserved) * 100}%"></div>
+            </div>
+            <div class="helper">${formatShare(row.observed_rate)}</div>
+          </div>
+          <div class="helper">Predicted ${formatShare(row.mean_predicted_probability)} | Observed ${formatShare(row.observed_rate)}</div>
+        `).join("")}
+        <div class="helper" style="margin-top: 10px;">Mean absolute calibration gap: ${formatDecimal(gap)}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderPlatform(metadata, quality) {
+  document.getElementById("contractList").innerHTML = metadata.dashboard_exports.map((item) => `
+    <div class="stack-item">
+      <strong>${item}</strong>
+      <div class="helper">Versioned analytical export consumed by the site or used for model review.</div>
+    </div>
+  `).join("");
+
+  const qualityCards = [
+    ["Missing review share", formatShare(quality.missing_review_share)],
+    ["Undelivered share", formatShare(quality.undelivered_share)],
+    ["Missing seller state", formatShare(quality.missing_seller_state_share)],
+    ["Missing category", formatShare(quality.missing_category_share)]
+  ];
+  document.getElementById("qualityGrid").innerHTML = qualityCards.map(([label, value]) => `
+    <div class="mini-block">
+      <span class="mini-label">${label}</span>
+      <strong class="mini-value">${value}</strong>
+    </div>
+  `).join("");
+
+  const rows = [
+    ["Raw directory", metadata.raw_dir],
+    ["Sample mode", metadata.sample_orders === null ? "Full dataset" : metadata.sample_orders],
+    ["Test rows", formatInt(metadata.test_rows)],
+    ["Models", metadata.models.join(", ")],
+    ["Export count", metadata.dashboard_exports.length]
+  ];
+  document.querySelector("#metadataTable tbody").innerHTML = rows.map(([label, value]) => `
+    <tr>
+      <th>${label}</th>
+      <td>${value}</td>
+    </tr>
+  `).join("");
+}
+
+function renderScenarios(summary, routes, categories, thresholds) {
+  const cross = routes.find((row) => String(row.same_state).toLowerCase() === "false") || routes[0] || {
+    avg_delivery_days: 0,
+    avg_freight: 0
+  };
+  const topCategory = [...categories]
+    .sort((left, right) => (number(right.orders) * number(right.low_review_rate)) - (number(left.orders) * number(left.low_review_rate)))[0] || {
+      product_category_name_english: "n/a",
+      orders: 0,
+      low_review_rate: 0
+    };
+  const bestRfThreshold = bestThreshold(thresholds, "Random Forest") || { positive_predictions: 0 };
+
+  const delayedOrders = Math.round(number(summary.delivered_orders) * number(summary.delay_rate_pct) / 100);
+  const rescueOpportunity = Math.round(delayedOrders * 0.15);
+  const categoryExposure = Math.round(number(topCategory.orders) * number(topCategory.low_review_rate));
+  const flaggedOrders = Math.round(number(bestRfThreshold.positive_predictions));
+
+  const cards = [
+    {
+      title: "Delay rescue program",
+      copy: "If the operation proactively triaged 15% of delayed orders, it would create a concrete intervention queue rather than waiting for ratings to fall.",
+      value: `${formatInt(rescueOpportunity)} orders`
+    },
+    {
+      title: "Category quality focus",
+      copy: `${topCategory.product_category_name_english} is the strongest first candidate for a joint seller, freight, and promise review.`,
+      value: `${formatInt(categoryExposure)} exposed orders`
+    },
+    {
+      title: "Cross-state SLA policy",
+      copy: `Cross-state routes average ${formatDecimal(cross.avg_delivery_days, 1)} days and should be treated as a separate promise-control lane.`,
+      value: formatMoney(cross.avg_freight)
+    },
+    {
+      title: "Analytical ML triage",
+      copy: `At the strongest Random Forest threshold, the model would flag a focused set of likely friction cases for review.`,
+      value: `${formatInt(flaggedOrders)} flagged orders`
+    }
+  ];
+
+  document.getElementById("scenarioGrid").innerHTML = cards.map((card) => `
+    <div class="scenario-card">
+      <strong>${card.title}</strong>
+      <div class="helper">${card.copy}</div>
+      <div class="score">${card.value}</div>
+    </div>
+  `).join("");
+}
+
+async function init() {
+  const [
+    executiveSummary,
+    monthly,
+    payments,
+    routes,
+    categories,
+    metrics,
+    features,
+    qualityRows,
+    calibrationRows,
+    confusionRows,
+    thresholds,
+    metadata
+  ] = await Promise.all([
+    loadCSV("executive_summary.csv"),
+    loadCSV("monthly_orders_revenue.csv"),
+    loadCSV("payment_summary.csv"),
+    loadCSV("same_state_vs_cross_state_delivery.csv"),
+    loadCSV("top_categories_summary.csv"),
+    loadCSV("model_metrics.csv"),
+    loadCSV("feature_importance.csv"),
+    loadCSV("data_quality_summary.csv"),
+    loadCSV("calibration_by_model.csv"),
+    loadCSV("confusion_matrix_summary.csv"),
+    loadCSV("threshold_metrics.csv"),
+    loadJSON("model_run_metadata.json")
+  ]);
+
+  const summary = executiveSummary[0];
+  const quality = qualityRows[0];
+
+  renderHero(summary, routes, metrics, metadata);
+  renderKpis(summary, calibrationRows);
+  renderPressureMap(summary, routes, categories);
+  renderReadout(summary, routes, payments, categories);
+  renderCategoryTable(categories);
+  renderPayments(payments);
+  renderRoutes(routes);
+  renderMonthly(monthly);
+  renderModelCards(metrics, thresholds);
+  renderFeatures(features);
+  renderConfusion(confusionRows);
+  renderThresholds(thresholds);
+  renderCalibration(calibrationRows);
+  renderPlatform(metadata, quality);
+  renderScenarios(summary, routes, categories, thresholds);
+}
+
+document.querySelectorAll(".nav-btn").forEach((button) => {
+  button.addEventListener("click", () => setSection(button.dataset.section));
+});
+
+init().catch((error) => {
+  console.error(error);
+  document.getElementById("heroChips").innerHTML = "<span class=\"chip\">Dashboard failed to load analytical outputs.</span>";
+});
 </script>
-</body></html>
+</body>
+</html>

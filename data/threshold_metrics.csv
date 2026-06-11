@@ -1,0 +1,11 @@
+model,threshold,precision,recall,f1,positive_predictions
+Logistic Regression,0.2,0.130346,0.98774,0.2303,18543
+Logistic Regression,0.3,0.155197,0.903147,0.264877,14240
+Logistic Regression,0.4,0.213049,0.73396,0.330238,8430
+Logistic Regression,0.5,0.2896,0.591745,0.388881,5000
+Logistic Regression,0.6,0.389105,0.490396,0.433918,3084
+Random Forest,0.2,0.130202,0.993461,0.23023,18671
+Random Forest,0.3,0.177589,0.836126,0.292955,11521
+Random Forest,0.4,0.298884,0.624029,0.404182,5109
+Random Forest,0.5,0.407842,0.539845,0.46465,3239
+Random Forest,0.6,0.524809,0.44953,0.484262,2096

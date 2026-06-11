@@ -1,81 +1,65 @@
 # Brazilian E-Commerce Delivery Experience Analytics
 
-**E-commerce Analytics | SQL Data Modeling | Customer Experience | Logistics Performance | Machine Learning | Business Storytelling**
+**E-commerce Analytics | SQL-style Modeling | Marketplace Operations | Customer Experience | Machine Learning**
 
-This project analyzes the Brazilian Olist public e-commerce dataset to understand how logistics, product category, payment behavior and delivery performance affect customer satisfaction.
+This project reframes the Olist public marketplace dataset around one business idea:
 
-The central story is: **in marketplace operations, delivery experience becomes the review**. A low customer review is not only a product signal. It is often the visible end of an operational chain involving seller structure, freight, distance, estimated delivery promise, actual delivery time and customer expectation.
+**delivery experience becomes the review.**
 
-## Interactive dashboard
+Instead of treating customer ratings as isolated feedback, the repository connects logistics, freight, geography, seller complexity, payment behavior, and delivery promise accuracy into an order-experience analytics layer.
 
-**[Open the dashboard →](https://luandarodrigues.github.io/olist-delivery-experience-analytics/?v=4)**
+## Live dashboard
 
-The dashboard was designed as a bilingual **PT/EN storytelling panel** inspired by Olist's visual identity: deep navy sections, white SaaS-style cards, rounded blue CTAs, light-blue highlights and a product/marketplace narrative.
+[Open the dashboard](https://luandarodrigues.github.io/olist-delivery-experience-analytics/)
 
-The story is organized into nine analytical sections:
+## What this repository now shows
 
-1. Executive story
-2. Raw → clean analytical mart
-3. Delay hurts reviews
-4. Geography changes cost
-5. Category exposure
-6. Payments and value
-7. Predictive dissatisfaction layer
-8. Business scenarios
-9. Final storyline
+- Reproducible analytical exports generated from `data/raw`
+- SQL-style order mart logic implemented in Python and documented in SQL
+- Executive summary tables for marketplace performance
+- Descriptive summaries for delay, geography, categories, and payments
+- ML validation beyond a single score: confusion matrix, calibration, and threshold analysis
+- Tests that verify the dashboard data contract
 
 ## Business question
 
-How can an e-commerce marketplace identify operational factors that drive poor customer reviews and use them to improve logistics, seller performance and customer experience?
+How can a marketplace identify operational drivers of poor reviews and act before customer dissatisfaction becomes public?
 
 ## Dataset
 
-The Olist dataset contains anonymized commercial data from Brazilian marketplace orders between 2016 and 2018.
+The project uses the Brazilian Olist e-commerce dataset from 2016 to 2018.
 
-Main raw entities used:
+Raw entities:
 
 - Orders
 - Order items
 - Payments
 - Reviews
 - Products
-- Sellers
 - Customers
+- Sellers
 - Product category translation
-- Geolocation reference
 
-The raw CSV files are stored in `data/raw/` using **Git LFS**. The dashboard reads derived analytical CSVs from `data/` to keep GitHub Pages fast and stable.
+The raw data is stored in `data/raw/` with Git LFS. The analytical outputs used by the dashboard are stored in `data/`.
 
-## Raw to clean analytical mart
+## Analytical framing
 
-The project uses SQL-style modeling to transform relational raw tables into an order-level analytical mart.
+The unit of analysis is the **order experience**.
 
-```sql
-WITH item_agg AS (...),
-     payment_agg AS (...),
-     review_agg AS (...)
-SELECT
-  orders.order_id,
-  customer_state,
-  delivery_days,
-  delay_days,
-  delayed_flag,
-  items_count,
-  sellers_count,
-  freight_value,
-  payment_value,
-  review_score,
-  CASE WHEN review_score <= 2 THEN 1 ELSE 0 END AS low_review_flag
-FROM orders
-LEFT JOIN customers
-LEFT JOIN item_agg
-LEFT JOIN payment_agg
-LEFT JOIN review_agg;
-```
+The pipeline joins operational and customer-facing signals into a single mart:
 
-This mart connects operational facts with review outcomes at order level. The unit of analysis is not just a transaction; it is the **order experience**.
+- delivery lead time
+- delay versus promise
+- item and seller complexity
+- freight and GMV
+- product category
+- customer and seller state
+- payment behavior
+- review outcome
 
-## Executive metrics
+This makes it possible to analyze logistics friction as a customer experience problem, not only a fulfillment metric.
+
+## Current executive snapshot
 
 | Metric | Value |
 |---|---:|
@@ -86,102 +70,121 @@ This mart connects operational facts with review outcomes at order level. The un
 | Sellers | 3,095 |
 | Products | 32,951 |
 | Total GMV including freight | R$ 15,843,553.24 |
-| Average order value | R$ 160.99 |
-| Average review score | 4.09 |
-| Low review rate, score <= 2 | 14.53% |
-| Delivery delay rate | 8.11% |
+| Average review score | 4.16 |
+| Low review rate | 12.77% |
+| Delay rate | 8.11% |
 | Average delivery time | 12.56 days |
 
-## Hypotheses tested
+## Marketplace findings
 
-| Hypothesis | Test | Business interpretation |
-|---|---|---|
-| Late deliveries have higher low-review risk | Compare low-review exposure in delayed orders | Delay is a customer experience risk driver |
-| Cross-state delivery changes cost and time | Compare same-state vs cross-state delivery days and freight | Geography should be treated as an operating model, not just a location field |
-| Some categories combine scale and dissatisfaction exposure | Rank categories by volume × low-review rate | Category prioritization should consider operational friction, not only sales volume |
+- Cross-state delivery is slower and more expensive than same-state delivery.
+- Delay is a strong dissatisfaction signal and should be monitored as a CX risk, not only an SLA failure.
+- Product categories combine different levels of volume and dissatisfaction exposure.
+- Reviews behave like an outcome of multiple operational layers, not only product quality.
 
-## Main findings
+## Modeling layer
 
-- Delivery performance is a central driver of customer experience.
-- Cross-state deliveries are slower and more expensive than same-state deliveries.
-- Same-state deliveries averaged around **7.9 days**, while cross-state deliveries averaged around **15.0 days**.
-- Cross-state freight was also higher, with average freight of about **R$ 23.69** versus **R$ 13.46** for same-state deliveries.
-- Categories such as bed bath table, furniture decor and computers accessories combine high volume with relevant low-review exposure.
-- Credit card is the dominant payment method by transaction volume and payment value.
-
-## Machine learning task
-
-A classification model was built to predict whether an order would receive a low review score, defined as review score <= 2.
+The model predicts whether an order receives a low review score, defined as `review_score <= 2`.
 
 | Model | Accuracy | ROC-AUC | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|---:|
-| Logistic Regression | 0.768 | 0.752 | 0.296 | 0.597 | 0.396 |
-| Random Forest | 0.839 | 0.759 | 0.397 | 0.519 | 0.450 |
+| Logistic Regression | 0.763 | 0.749 | 0.290 | 0.592 | 0.389 |
+| Random Forest | 0.841 | 0.770 | 0.408 | 0.540 | 0.465 |
 
-The target is imbalanced, so recall, precision and F1 are more useful than accuracy alone. The model is not intended as a final production system. It is an analytical risk layer to help identify where dissatisfaction is more likely to appear.
+This is intentionally positioned as an analytical prioritization layer, not a production decision engine.
 
-## Most relevant features
+## Reproducible output contract
 
-| Feature | Business interpretation |
-|---|---|
-| delay_days | How late the order was compared with the estimated delivery date |
-| delivery_days | Total time between purchase and delivery |
-| items_count | Number of items in the order; proxy for complexity |
-| freight | Logistics cost proxy |
-| product_category_name_english | Product/category experience pattern |
-| customer_state | Geographic demand and delivery pattern |
-| sellers_count | Complexity of multi-seller orders |
+The pipeline now regenerates the dashboard-facing artifacts directly from raw data:
 
-## Business scenarios
+- `executive_summary.csv`
+- `monthly_orders_revenue.csv`
+- `payment_summary.csv`
+- `same_state_vs_cross_state_delivery.csv`
+- `top_categories_summary.csv`
+- `model_metrics.csv`
+- `feature_importance.csv`
+- `data_quality_summary.csv`
+- `calibration_by_model.csv`
+- `confusion_matrix_summary.csv`
+- `threshold_metrics.csv`
+- `model_run_metadata.json`
 
-The dashboard includes scenario logic to move from descriptive analytics to decision support:
-
-| Scenario | Assumption | Use |
-|---|---|---|
-| Delay rescue | Prioritize a share of delayed orders | Customer communication and exception handling |
-| Category focus | Act on high-scale, high-risk categories | Seller/category operational improvement |
-| Cross-state control | Treat long-distance delivery as a distinct SLA group | Delivery promise accuracy and freight monitoring |
-| Review risk reduction | Reduce low-review exposure in priority segments | CX protection before the review becomes public |
-
-## Project structure
+## Repository structure
 
 ```text
 olist-delivery-experience-analytics/
-├── README.md
-├── data/
-│   ├── executive_summary.csv
-│   ├── feature_importance.csv
-│   ├── model_metrics.csv
-│   ├── monthly_orders_revenue.csv
-│   ├── payment_summary.csv
-│   ├── same_state_vs_cross_state_delivery.csv
-│   ├── top_categories_summary.csv
-│   └── raw/
-│       └── Olist raw CSV files stored with Git LFS
-├── docs/
-│   └── index.html
-├── scripts/
-│   └── download_olist_raw_kagglehub.py
-└── sql/
-    └── 01_build_order_experience_mart.sql
+|-- README.md
+|-- pyproject.toml
+|-- requirements.txt
+|-- data/
+|   |-- raw/
+|   `-- analytical CSV exports
+|-- docs/
+|   `-- index.html
+|-- scripts/
+|   |-- _bootstrap.py
+|   |-- build_olist_analytics.py
+|   |-- download_olist_raw_kagglehub.py
+|   `-- olist_experience_model.py
+|-- sql/
+|-- src/
+|   `-- olist_delivery_experience_analytics/
+|       |-- __init__.py
+|       |-- cli.py
+|       `-- pipeline.py
+`-- tests/
+    `-- test_pipeline_outputs.py
 ```
 
-## Tools and methods
+## How to run
 
-- Python
-- Pandas
-- SQL / SQLite-ready analytical modeling
-- Git LFS
-- KaggleHub
-- Client-side JavaScript analytics
-- Feature engineering
-- Classification modeling
-- Customer experience analytics
-- Logistics performance analysis
-- Business storytelling dashboard
+### 1. Install dependencies
 
-## Why this project matters
+```bash
+pip install -r requirements.txt
+```
 
-This project shows how marketplace data can be turned into an operational intelligence layer. It connects commercial performance, logistics, seller structure and customer reviews into one analytical view.
+### 2. Build the analytical outputs
 
-The main analytical value is the storytelling: it reframes customer reviews as a late indicator of operational quality and shows how a business can move from reactive review monitoring to proactive dissatisfaction risk management.
+```bash
+python scripts/build_olist_analytics.py
+```
+
+This reads from `data/raw/` and writes the analytical tables to `data/`.
+
+You can also use the package entry point:
+
+```bash
+olist-analytics-pipeline data/raw data
+```
+
+For quick smoke tests:
+
+```bash
+olist-analytics-pipeline data/raw temp_outputs --sample-orders 2500
+```
+
+### 3. Run tests
+
+```bash
+pytest
+```
+
+## Why the refactor matters
+
+Before this update, the repository had analytical assets and storytelling, but the code path was not fully aligned with the dashboard contract.
+
+The stronger version now has:
+
+- a single package-backed pipeline
+- consistent raw-data paths
+- reproducible dashboard exports
+- compatibility wrappers for existing scripts
+- automated validation for the exported artifacts
+
+That moves the project closer to real analytical engineering work instead of a one-time portfolio snapshot.
+
+## Stack
+
+Python, Pandas, scikit-learn, pytest, SQL-style data modeling, Git LFS, HTML, CSS, JavaScript, marketplace analytics, logistics analytics, and customer experience modeling.

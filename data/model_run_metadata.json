@@ -1,0 +1,22 @@
+{
+  "raw_dir": "data\\raw",
+  "sample_orders": null,
+  "test_rows": 19165,
+  "models": [
+    "Logistic Regression",
+    "Random Forest"
+  ],
+  "dashboard_exports": [
+    "executive_summary.csv",
+    "monthly_orders_revenue.csv",
+    "payment_summary.csv",
+    "same_state_vs_cross_state_delivery.csv",
+    "top_categories_summary.csv",
+    "model_metrics.csv",
+    "feature_importance.csv",
+    "data_quality_summary.csv",
+    "calibration_by_model.csv",
+    "confusion_matrix_summary.csv",
+    "threshold_metrics.csv"
+  ]
+}

@@ -1,0 +1,11 @@
+model,bin,mean_predicted_probability,observed_rate
+Logistic Regression,1,0.236232,0.048004
+Logistic Regression,2,0.312439,0.063397
+Logistic Regression,3,0.37796,0.079311
+Logistic Regression,4,0.477435,0.106705
+Logistic Regression,5,0.723822,0.340986
+Random Forest,1,0.228313,0.043569
+Random Forest,2,0.280437,0.06131
+Random Forest,3,0.323131,0.068354
+Random Forest,4,0.389297,0.100965
+Random Forest,5,0.663935,0.364206
